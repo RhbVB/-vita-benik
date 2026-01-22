@@ -1,0 +1,12 @@
+{
+  "name": "vita-benik",
+  "version": "1.0.0",
+  "description": "VITA BENIK - Private Investment Office",
+  "scripts": {
+    "start": "npx serve .",
+    "build": "echo 'Static site - no build needed'"
+  },
+  "author": "Ron Buhnik",
+  "license": "UNLICENSED",
+  "private": true
+}

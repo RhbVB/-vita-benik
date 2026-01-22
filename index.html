@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VITA BENIK | Private Investment Office</title>
+    <meta name="description" content="Bridging exceptional capital with unseen global opportunities. A private investment office for the discerning investor.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-primary: #0A0A0A;
+            --bg-secondary: #121212;
+            --gold: #B8956A;
+            --gold-light: #D4AF7A;
+            --gold-dark: #8B7355;
+            --text-primary: #E0E0E0;
+            --text-secondary: #9A9A9A;
+            --text-muted: #666666;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            font-weight: 300;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: 'Cinzel', serif;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+        }
+
+        /* Subtle grain texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: linear-gradient(to bottom, var(--bg-primary) 0%, transparent 100%);
+        }
+
+        .logo {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 45px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(184, 149, 106, 0.03) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeUp 1s ease forwards;
+            animation-delay: 0.3s;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            color: var(--text-secondary);
+            font-weight: 300;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeUp 1s ease forwards;
+            animation-delay: 0.6s;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 3rem;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.75rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            transition: all 0.4s ease;
+            opacity: 0;
+            animation: fadeUp 1s ease forwards;
+            animation-delay: 0.9s;
+        }
+
+        .cta-button:hover {
+            background-color: var(--gold);
+            color: var(--bg-primary);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            animation: fadeIn 1s ease forwards, float 2s ease-in-out infinite;
+            animation-delay: 1.5s, 1.5s;
+        }
+
+        .scroll-indicator span {
+            display: block;
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, var(--gold), transparent);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 8rem 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 2rem;
+        }
+
+        /* Philosophy Section */
+        .philosophy {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+            min-height: 80vh;
+        }
+
+        .philosophy-content h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+        }
+
+        .philosophy-content p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .philosophy-quote {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            color: var(--gold);
+            font-style: italic;
+            padding-left: 2rem;
+            border-left: 1px solid var(--gold-dark);
+            margin-top: 2rem;
+        }
+
+        .philosophy-visual {
+            position: relative;
+            height: 400px;
+        }
+
+        .philosophy-visual::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            border: 1px solid var(--gold-dark);
+            opacity: 0.3;
+        }
+
+        .philosophy-visual::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+            width: 200px;
+            height: 200px;
+            border: 1px solid var(--gold);
+            opacity: 0.2;
+        }
+
+        /* Divider */
+        .divider {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold-dark), transparent);
+            opacity: 0.3;
+        }
+
+        /* Expertise Section */
+        .expertise {
+            text-align: center;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .expertise h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 1rem;
+        }
+
+        .expertise-intro {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 4rem;
+        }
+
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .expertise-item {
+            padding: 3rem 2rem;
+            border: 1px solid rgba(184, 149, 106, 0.1);
+            transition: all 0.4s ease;
+        }
+
+        .expertise-item:hover {
+            border-color: var(--gold-dark);
+            background: rgba(184, 149, 106, 0.02);
+        }
+
+        .expertise-item h3 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: var(--gold);
+        }
+
+        .expertise-item p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Contact Section */
+        .contact {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 1rem;
+        }
+
+        .contact-intro {
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+        }
+
+        .contact-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border: 1px solid rgba(184, 149, 106, 0.2);
+            color: var(--text-primary);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .form-group input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .form-group select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23B8956A' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+        }
+
+        .form-group select option {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .capital-field {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .capital-field.visible {
+            display: block;
+            opacity: 1;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 1.2rem;
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            margin-top: 1rem;
+        }
+
+        .submit-button:hover {
+            background: var(--gold);
+            color: var(--bg-primary);
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem;
+            text-align: center;
+            border-top: 1px solid rgba(184, 149, 106, 0.1);
+        }
+
+        .footer-logo {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-logo img {
+            height: 60px;
+            width: auto;
+        }
+
+        .footer-locations {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 0.15em;
+            margin-bottom: 2rem;
+        }
+
+        .footer-legal {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        /* Animations */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 0.6; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            nav {
+                padding: 1.5rem 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            section {
+                padding: 6rem 2rem;
+            }
+
+            .philosophy {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .philosophy-visual {
+                display: none;
+            }
+
+            .expertise-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                letter-spacing: 0.1em;
+            }
+
+            .cta-button {
+                padding: 0.8rem 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="logo"><img src="logo.jpg" alt="VITA BENIK"></a>
+        <div class="nav-links">
+            <a href="#philosophy">Philosophy</a>
+            <a href="#expertise">Expertise</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <h1>The Art of Rare Access</h1>
+            <p class="hero-subtitle">Bridging exceptional capital with unseen global opportunities</p>
+            <a href="#contact" class="cta-button">Inquire</a>
+        </div>
+        <div class="scroll-indicator">
+            <span></span>
+        </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section class="philosophy" id="philosophy">
+        <div class="philosophy-content">
+            <span class="section-label">The Philosophy</span>
+            <h2>Orchestrating Value</h2>
+            <p>We operate at the intersection of discretion and opportunity. Our role is not to broadcast, but to connect—matching exceptional capital with ventures that merit attention.</p>
+            <p>Every introduction is deliberate. Every relationship, cultivated. We believe that true value emerges not from volume, but from precision.</p>
+            <p class="philosophy-quote">"Business is not just about numbers. It is about resonance."</p>
+        </div>
+        <div class="philosophy-visual"></div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Expertise Section -->
+    <section class="expertise" id="expertise">
+        <span class="section-label">Areas of Focus</span>
+        <h2>Global Reach, Local Insight</h2>
+        <p class="expertise-intro">Our network spans undercovered markets across Asia and the Americas, identifying opportunities before they surface.</p>
+        
+        <div class="expertise-grid">
+            <div class="expertise-item">
+                <h3>Real Estate</h3>
+                <p>Off-market properties and development opportunities in emerging and established markets.</p>
+            </div>
+            <div class="expertise-item">
+                <h3>Technology</h3>
+                <p>Pre-IPO positions and strategic stakes in transformative ventures.</p>
+            </div>
+            <div class="expertise-item">
+                <h3>Cross-Border Partnerships</h3>
+                <p>Facilitating strategic alliances that transcend geographical boundaries.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <span class="section-label">Begin</span>
+        <h2>Initiate a Dialogue</h2>
+        <p class="contact-intro">Access is by invitation or application.</p>
+        
+        <form class="contact-form" id="contactForm">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Your full name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="your@email.com" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="organization">Organization</label>
+                <input type="text" id="organization" name="organization" placeholder="Company or family office">
+            </div>
+            
+            <div class="form-group">
+                <label for="inquiryType">Inquiry Type</label>
+                <select id="inquiryType" name="inquiryType" required>
+                    <option value="" disabled selected>Select your inquiry type</option>
+                    <option value="investor">Investor Access</option>
+                    <option value="deal-source">Deal Source</option>
+                    <option value="partnership">Strategic Partnership</option>
+                </select>
+            </div>
+            
+            <div class="form-group capital-field" id="capitalField">
+                <label for="capital">Investment Capacity</label>
+                <select id="capital" name="capital">
+                    <option value="" disabled selected>Select range</option>
+                    <option value="under-500k">Under $500K</option>
+                    <option value="500k-1m">$500K – $1M</option>
+                    <option value="1m-5m">$1M – $5M</option>
+                    <option value="5m-plus">$5M+</option>
+                </select>
+            </div>
+            
+            <button type="submit" class="submit-button">Submit Inquiry</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo"><img src="logo.jpg" alt="VITA BENIK" height="60"></div>
+        <div class="footer-locations">Miami · Tel Aviv · Tokyo</div>
+        <div class="footer-legal">© 2026 Benik Global Connections LLC. All rights reserved.</div>
+    </footer>
+
+    <script>
+        // Conditional Capital Field Display
+        const inquiryType = document.getElementById('inquiryType');
+        const capitalField = document.getElementById('capitalField');
+        const capitalSelect = document.getElementById('capital');
+
+        inquiryType.addEventListener('change', function() {
+            if (this.value === 'investor') {
+                capitalField.classList.add('visible');
+                capitalSelect.setAttribute('required', 'required');
+            } else {
+                capitalField.classList.remove('visible');
+                capitalSelect.removeAttribute('required');
+                capitalSelect.value = '';
+            }
+        });
+
+        // Form Submission Handler
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Collect form data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                organization: document.getElementById('organization').value,
+                inquiryType: document.getElementById('inquiryType').value,
+                capital: document.getElementById('capital').value
+            };
+            
+            // Here you would typically send to your backend
+            console.log('Form submitted:', formData);
+            
+            // Show confirmation (replace with actual submission logic)
+            alert('Thank you for your inquiry. We will be in touch.');
+            this.reset();
+            capitalField.classList.remove('visible');
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe sections for scroll animations
+        document.querySelectorAll('section:not(.hero)').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
